@@ -1,11 +1,9 @@
 const { createTaskModel } = require('../models/taskModel');
-const { badRequest } = require('../utils/dictionary');
-const { taskSchema } = require('../utils/schemas');
+const taskValidation = require('../utils/validations');
 
 const createTaskService = async (task, status) => {
   
-  const { error } = taskSchema.validate({ task, status });
-  if (error) return res.status(badRequest).json({ message: error.message });
+  taskValidation(task, status);
 
   const id = await createTaskModel(task, status);
 
