@@ -1,4 +1,4 @@
-const { createTaskService, getTasksService } = require('../services/taskService');
+const { createTaskService, getTasksService, updateTaskService } = require('../services/taskService');
 const { created, success } = require('../utils/dictionary');
 
 const createTaskController = async (req, res, next) => {
@@ -20,7 +20,21 @@ const getTasksController = async (req, res, next) => {
 
     return res.status(success).json(tasks);
   } catch (error) {
-    console.log(`GET TASKS -> ${console.log(error.message)}`);
+    console.log(`GET TASKS -> ${error.message}`);
+    next(error);
+  }
+}
+
+const updateTaskController = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const toDo = req.body;
+
+    const updatedTask = await updateTaskService(id, toDo);
+
+    return res.status(success).json(updatedTask);
+  } catch (error) {
+    console.log(`PUT TASK -> ${error.message}`);
     next(error);
   }
 }
@@ -28,4 +42,5 @@ const getTasksController = async (req, res, next) => {
 module.exports = {
   createTaskController,
   getTasksController,
+  updateTaskController,
 }
