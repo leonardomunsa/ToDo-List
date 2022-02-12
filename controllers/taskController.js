@@ -1,5 +1,10 @@
-const { createTaskService, getTasksService, updateTaskService } = require('../services/taskService');
-const { created, success } = require('../utils/dictionary');
+const {
+  createTaskService,
+  getTasksService,
+  updateTaskService,
+  deleteTaskService,
+} = require("../services/taskService");
+const { created, success } = require("../utils/dictionary");
 
 const createTaskController = async (req, res, next) => {
   try {
@@ -12,7 +17,7 @@ const createTaskController = async (req, res, next) => {
     console.log(`POST CREATE RECIPES -> ${error.message}`);
     next(error);
   }
-}
+};
 
 const getTasksController = async (req, res, next) => {
   try {
@@ -23,7 +28,7 @@ const getTasksController = async (req, res, next) => {
     console.log(`GET TASKS -> ${error.message}`);
     next(error);
   }
-}
+};
 
 const updateTaskController = async (req, res, next) => {
   try {
@@ -37,10 +42,24 @@ const updateTaskController = async (req, res, next) => {
     console.log(`PUT TASK -> ${error.message}`);
     next(error);
   }
-}
+};
+
+const deleteTaskController = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    await deleteTaskService(id);
+
+    return res.status(success).json();
+  } catch (error) {
+    console.log(`DELETE TASK -> ${error.message}`);
+    next(error);
+  }
+};
 
 module.exports = {
   createTaskController,
   getTasksController,
   updateTaskController,
-}
+  deleteTaskController,
+};
