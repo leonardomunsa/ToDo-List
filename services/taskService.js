@@ -1,4 +1,4 @@
-const { createTaskModel } = require('../models/taskModel');
+const { createTaskModel, getTasksModel } = require('../models/taskModel');
 const taskValidation = require('../utils/validations');
 
 const createTaskService = async (task, status) => {
@@ -14,6 +14,15 @@ const createTaskService = async (task, status) => {
   }
 }
 
+const getTasksService = async () => {
+  const tasks = await getTasksModel();
+
+  if (!tasks) return [];
+
+  return tasks;
+}
+
 module.exports = {
   createTaskService,
+  getTasksService,
 }
