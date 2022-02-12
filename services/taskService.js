@@ -17,6 +17,8 @@ const createTaskService = async (task, status) => {
 const getTasksService = async () => {
   const tasks = await getTasksModel();
 
+  if (!tasks) return [];
+
   return tasks;
 }
 
