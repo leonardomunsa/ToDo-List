@@ -5,7 +5,7 @@ const { getConnection } = require('./mongoMockConnection.test');
 
 const TaskModel = require('../../models/taskModel');
 
-describe('Get all the tasks from db', () => {
+describe('Update a task', () => {
   let connectionMock;
 
   const payloadUpdateTask = {
