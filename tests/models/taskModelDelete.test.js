@@ -8,11 +8,6 @@ const TaskModel = require('../../models/taskModel');
 describe('Delete a task', () => {
   let connectionMock;
 
-  const payloadUpdateTask = {
-    task: 'Read a book',
-    status: 'done',
-  }
-
   before(async () => {
     connectionMock = await getConnection();
     sinon.stub(MongoClient, 'connect').resolves(connectionMock);
