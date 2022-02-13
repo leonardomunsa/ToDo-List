@@ -4,7 +4,7 @@
   "description": "��#\u0000 \u0000T\u0000o\u0000D\u0000o\u0000-\u0000L\u0000i\u0000s\u0000t\u0000\r\u0000 \u0000",
   "main": "index.js",
   "scripts": {
-    "test": "mocha ./tests/models/taskModelCreate.test.js --exit",
+    "test": "mocha ./tests --exit",
     "start": "nodemon .",
     "dev": "nodemon ."
   },
