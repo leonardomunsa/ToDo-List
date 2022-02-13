@@ -4,7 +4,7 @@
   "description": "��#\u0000 \u0000T\u0000o\u0000D\u0000o\u0000-\u0000L\u0000i\u0000s\u0000t\u0000\r\u0000 \u0000",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha ./tests/models/taskModelCreate.test.js --exit",
     "start": "nodemon .",
     "dev": "nodemon ."
   },
@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/leonardomunsa/ToDo-List#readme",
   "dependencies": {
+    "body-parser": "^1.19.1",
     "dotenv": "^16.0.0",
     "eslint-config-trybe-backend": "^1.0.4",
     "eslintrc": "^1.0.6",
@@ -27,5 +28,11 @@
     "joi": "^17.6.0",
     "mongodb": "^4.3.1",
     "nodemon": "^2.0.15"
+  },
+  "devDependencies": {
+    "chai": "^4.3.6",
+    "mocha": "^9.2.0",
+    "mongodb-memory-server": "^6.9.6",
+    "sinon": "^13.0.1"
   }
 }
