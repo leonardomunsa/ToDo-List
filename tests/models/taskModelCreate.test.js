@@ -3,7 +3,6 @@ const { expect } = require('chai');
 const { MongoClient } = require('mongodb');
 const { getConnection } = require('./mongoMockConnection.test');
 
-const mongoConnection = require('../../models/connection');
 const TaskModel = require('../../models/taskModel');
 
 describe('Insert a new task', () => {
