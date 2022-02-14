@@ -4,6 +4,7 @@ const { MongoClient } = require('mongodb');
 const { getConnection } = require('../models/mongoMockConnection.test');
 
 const TaskService = require('../../services/taskService');
+const { badRequest } = require('../../utils/dictionary');
 
 describe('Inserts a new task', () => {
 
@@ -34,7 +35,7 @@ describe('Inserts a new task', () => {
       try {
         await TaskService.createTaskService(payloadTaskWrong);
       } catch (error) {
-        expect(error).to.have.property('status').equal(400);
+        expect(error).to.have.property('status').equal(badRequest);
       }
     });
 
