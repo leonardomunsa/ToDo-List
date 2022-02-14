@@ -1,10 +1,22 @@
 const sinon = require('sinon');
 const { expect } = require('chai');
+const { MongoClient } = require('mongodb');
+const { getConnection } = require('../models/mongoMockConnection.test');
 
-const TaskModel = require('../../models/taskModel');
 const TaskService = require('../../services/taskService');
 
 describe('Inserts a new task', () => {
+
+  before(async () => {
+    connectionMock = await getConnection();
+    sinon.stub(MongoClient, 'connect').resolves(connectionMock);
+  });
+
+  after(async () => {
+    await connectionMock.db('todolist').collection('todolist').drop();
+    MongoClient.connect.restore();
+  });
+
   describe('when the payload is not valid', () => {
     const payloadTaskWrong = {
       task: 15,
@@ -22,7 +34,7 @@ describe('Inserts a new task', () => {
       try {
         await TaskService.createTaskService(payloadTaskWrong);
       } catch (error) {
-        expect(error).to.be.have.property('status').equal(400);
+        expect(error).to.have.property('status').equal(400);
       }
     });
 
