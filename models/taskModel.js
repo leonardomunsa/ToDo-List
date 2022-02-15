@@ -1,7 +1,7 @@
 const { ObjectId } = require('mongodb');
 const connection = require('./connection');
 
-const createTaskModel = async (task, status) => {
+const createTaskModel = async ({task, status}) => {
   const db = await connection();
   const { insertedId } = await db
     .collection('todolist')

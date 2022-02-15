@@ -1,4 +1,5 @@
 const express = require('express');
+require('dotenv').config();
 const bodyParser = require('body-parser');
 const errorHandler = require('./middlewares/errorHandler');
 const { createTaskController, getTasksController, updateTaskController, deleteTaskController } = require('./controllers/taskController');
@@ -7,7 +8,7 @@ const app = express();
 
 app.use(bodyParser.json());
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;;
 
 app.post('/task', createTaskController);
 app.get('/task', getTasksController);
