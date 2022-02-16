@@ -33,6 +33,13 @@ function App() {
     axios.delete(`http://localhost:3000/task/${taskId}`);
   }
 
+  const updateTask = () => {
+    axios.put(`http://localhost:3000/task/${taskId}`, {
+      task: infosTask.task,
+      status: infosTask.status,
+    })
+  }
+
   const createTask = () => {
     axios.post("http://localhost:3000/task", {
       task: infosTask.task,
@@ -57,7 +64,8 @@ function App() {
       </select>
       <input onChange={ handleChange } name="task"></input>
       <button type="button" onClick={ createTask }>Add task</button>
-      { taskId ? <button type="button" onClick={ deleteTask }>Delete task</button> : '' }
+      <button type="button" disabled={ taskId ? false : true } onClick={ deleteTask }>Delete task</button>
+      <button type="button" disabled={ taskId ? false : true } onClick={ updateTask }>Update task</button>
     </div>
   );
 }
