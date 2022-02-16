@@ -7,6 +7,7 @@ function App() {
     task: "",
     status: "pending",
   });
+  const [taskId, setTaskId] = useState();
 
   useEffect(() => {
     fetch("http://localhost:3000/task")
@@ -28,6 +29,10 @@ function App() {
     
   };
 
+  const deleteTask = () => {
+    axios.delete(`http://localhost:3000/task/${taskId}`);
+  }
+
   const createTask = () => {
     axios.post("http://localhost:3000/task", {
       task: infosTask.task,
@@ -40,7 +45,7 @@ function App() {
       <dl>
         {tasks.map(({ _id, task, status }) => (
           <>
-            <dt key={_id}>{task}</dt>
+            <dt key={_id} onClick={() => setTaskId(_id) }>{task}</dt>
             <dd>- {status}</dd>
           </>
         ))}
@@ -52,6 +57,7 @@ function App() {
       </select>
       <input onChange={ handleChange } name="task"></input>
       <button type="button" onClick={ createTask }>Add task</button>
+      { taskId ? <button type="button" onClick={ deleteTask }>Delete task</button> : '' }
     </div>
   );
 }
