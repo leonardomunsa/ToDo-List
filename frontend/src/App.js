@@ -36,12 +36,13 @@ function App() {
 
   const updateTask = () => {
     axios.put(`http://localhost:3000/task/${taskId}`, {
-      task: infosTask.task || tasks.find((element) => element._id === taskId).task,
+      task: infosTask.task || tasks.find(({ _id }) => _id === taskId).task,
       status: infosTask.status,
     })
   }
 
   const createTask = () => {
+    if (tasks.some(({ task }) => task === infosTask.task)) return window.alert('This task already exists');
     axios.post("http://localhost:3000/task", {
       task: infosTask.task,
       status: infosTask.status,
@@ -71,7 +72,7 @@ function App() {
       <input onChange={ handleChange } name="task"></input>
       <button type="button" onClick={ createTask }>Add task</button>
       <button type="button" disabled={ taskId ? false : true } onClick={ deleteTask }>Delete task</button>
-      <button type="button" disabled={ taskId ? false : true } onClick={ updateTask }>Update task</button>
+      <button type="button" disabled={ taskId ? false : true } onClick={ updateTask }>Update task or status</button>
     </div>
   );
 }
