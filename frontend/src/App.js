@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import "./App.css";
 const axios = require('axios');
 
 function App() {
@@ -8,6 +9,7 @@ function App() {
     status: "pending",
   });
   const [taskId, setTaskId] = useState();
+  const [taskColor, setTaskColor] = useState(false);
 
   useEffect(() => {
     fetch("http://localhost:3000/task")
@@ -26,7 +28,6 @@ function App() {
       ...prevState,
       [name]: value,
     }));
-    
   };
 
   const deleteTask = () => {
@@ -35,7 +36,7 @@ function App() {
 
   const updateTask = () => {
     axios.put(`http://localhost:3000/task/${taskId}`, {
-      task: infosTask.task,
+      task: infosTask.task || tasks.find((element) => element._id === taskId).task,
       status: infosTask.status,
     })
   }
@@ -49,10 +50,15 @@ function App() {
 
   return (
     <div className="App">
+      <h2>TO DO LIST</h2>
       <dl>
         {tasks.map(({ _id, task, status }) => (
           <>
-            <dt key={_id} onClick={() => setTaskId(_id) }>{task}</dt>
+            <dt onClick={({target}) => { 
+              setTaskId(_id);
+              setTaskColor(!taskColor);
+              taskColor ? target.style.color = 'black' : target.style.color = 'red';
+            } } key={_id}>{task}</dt>
             <dd>- {status}</dd>
           </>
         ))}
