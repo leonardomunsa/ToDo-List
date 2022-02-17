@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha ./tests --exit --timeout 10000",
-    "start": "pm2-runtime start ecosystem.config.yml",
+    "start": "nodemon .",
     "dev": "nodemon ."
   },
   "repository": {
@@ -15,15 +15,13 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "engines": {
-    "node": "16.13.0"
-  },
   "bugs": {
     "url": "https://github.com/leonardomunsa/ToDo-List/issues"
   },
   "homepage": "https://github.com/leonardomunsa/ToDo-List#readme",
   "dependencies": {
     "body-parser": "^1.19.1",
+    "cors": "^2.8.5",
     "dotenv": "^16.0.0",
     "eslint-config-trybe-backend": "^1.0.4",
     "eslintrc": "^1.0.6",
