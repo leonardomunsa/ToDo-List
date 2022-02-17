@@ -77,7 +77,7 @@ function App() {
         <option value="active">active</option>
         <option value="done">done</option>
       </select>
-      <input onChange={handleChange} name="task"></input>
+      <input placeholder="Write a task" onChange={handleChange} name="task"></input>
       <button type="button" onClick={createTask}>
         Add task
       </button>
